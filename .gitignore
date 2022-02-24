@@ -1,1 +1,7 @@
-CustDetails exercises.xlsx
+env.py
+.DS_Store
+.ipynb_checkpoints/
+__pycache__
+__pycache__/
+*.xlsx
+*.csv
