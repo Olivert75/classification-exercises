@@ -29,12 +29,12 @@ def prep_iris(iris_df):
     
     return new_iris_df
 
-def iris_split_data(iris_df):
+def iris_split_data(new_iris_df):
     '''
     take in a DataFrame and return train, validate, and test DataFrames; stratify on species.
     return train, validate, test DataFrames.
     '''
-    train_validate, test = train_test_split(iris_df, test_size=.2, random_state=123, stratify=iris_df.species)
+    train_validate, test = train_test_split(new_iris_df, test_size=.2, random_state=123, stratify=new_iris_df.species)
     
     train, validate = train_test_split(train_validate, 
                                        test_size=.3, 
@@ -59,12 +59,12 @@ def prep_titanic(titanic_df):
 
     return new_titanic_df
 
-def split_data(titanic_df):
+def split_data(new_titanic_df):
     '''
     take in a DataFrame and return train, validate, and test DataFrames; stratify on survived.
     return train, validate, test DataFrames.
     '''
-    train_validate, test = train_test_split(titanic_df, test_size=.2, random_state=123, stratify=titanic_df.survived)
+    train_validate, test = train_test_split(new_titanic_df, test_size=.2, random_state=123, stratify=new_titanic_df.survived)
     
     train, validate = train_test_split(train_validate, 
                                        test_size=.3, 
@@ -92,12 +92,12 @@ def prep_telco(telco_df):
     
     return new_telco_df
 
-def split_data(telco_df):
+def split_data(new_telco_df):
     '''
     take in a DataFrame and return train, validate, and test DataFrames; stratify on churned.
     return train, validate, test DataFrames.
     '''
-    train_validate, test = train_test_split(telco_df, test_size=.2, random_state=123, stratify=telco_df.churn)
+    train_validate, test = train_test_split(new_telco_df, test_size=.2, random_state=123, stratify=new_telco_df.churn)
     
     train, validate = train_test_split(train_validate, 
                                        test_size=.3, 
