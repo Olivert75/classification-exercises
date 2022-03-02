@@ -29,6 +29,20 @@ def prep_iris(iris_df):
     
     return new_iris_df
 
+def iris_split_data(iris_df):
+    '''
+    take in a DataFrame and return train, validate, and test DataFrames; stratify on species.
+    return train, validate, test DataFrames.
+    '''
+    train_validate, test = train_test_split(iris_df, test_size=.2, random_state=123, stratify=iris_df.species)
+    
+    train, validate = train_test_split(train_validate, 
+                                       test_size=.3, 
+                                       random_state=123, 
+                                       stratify=train_validate.species)
+    
+    return train, validate, test
+
 #**********************************TITANNIC DATASET**********************************
 
 def prep_titanic(titanic_df):
@@ -44,6 +58,20 @@ def prep_titanic(titanic_df):
     new_titanic_df = pd.concat([new_titanic_df, dummy_df],axis=1)
 
     return new_titanic_df
+
+def split_data(titanic_df):
+    '''
+    take in a DataFrame and return train, validate, and test DataFrames; stratify on survived.
+    return train, validate, test DataFrames.
+    '''
+    train_validate, test = train_test_split(titanic_df, test_size=.2, random_state=123, stratify=titanic_df.survived)
+    
+    train, validate = train_test_split(train_validate, 
+                                       test_size=.3, 
+                                       random_state=123, 
+                                       stratify=train_validate.survived)
+    return train, validate, test
+
 #**********************************TELCO DATASET**********************************
 
 def prep_telco(telco_df):
@@ -63,3 +91,16 @@ def prep_telco(telco_df):
         new_telco_df = new_telco_df.drop(columns=[col])
     
     return new_telco_df
+
+def split_data(telco_df):
+    '''
+    take in a DataFrame and return train, validate, and test DataFrames; stratify on churned.
+    return train, validate, test DataFrames.
+    '''
+    train_validate, test = train_test_split(telco_df, test_size=.2, random_state=123, stratify=telco_df.churn)
+    
+    train, validate = train_test_split(train_validate, 
+                                       test_size=.3, 
+                                       random_state=123, 
+                                       stratify=train_validate.churn)
+    return train, validate, test
