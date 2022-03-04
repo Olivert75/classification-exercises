@@ -59,7 +59,7 @@ def prep_titanic(titanic_df):
 
     return new_titanic_df
 
-def split_data(new_titanic_df):
+def titanic_split_data(new_titanic_df):
     '''
     take in a DataFrame and return train, validate, and test DataFrames; stratify on survived.
     return train, validate, test DataFrames.
@@ -93,7 +93,7 @@ def prep_telco(telco_df):
     
     return new_telco_df
 
-def split_data(new_telco_df):
+def telco_split_data(new_telco_df):
     '''
     take in a DataFrame and return train, validate, and test DataFrames; stratify on churned.
     return train, validate, test DataFrames.
