@@ -83,12 +83,13 @@ def prep_telco(telco_df):
     new_telco_df['total_charges'] = new_telco_df.total_charges.replace(' ', np.nan).astype(float)
     
     #Encode the catergoical columns
-    obj_col = new_telco_df.select_dtypes(include = "object").columns
+    obj_col = new_telco_df.select_dtypes("object").columns.to_list()
     
     for col in obj_col:
         dummy_df = pd.get_dummies(new_telco_df[[col]],dummy_na=False,drop_first=[True,True])
         new_telco_df = pd.concat([new_telco_df, dummy_df],axis=1)
-        new_telco_df = new_telco_df.drop(columns=[col])
+    
+    new_telco_df.drop(columns=obj_col,inplace =True)
     
     return new_telco_df
 
