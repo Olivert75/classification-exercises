@@ -47,24 +47,30 @@ def iris_split_data(new_iris_df):
 
 def prep_titanic(titanic_df):
     
-    #Drop duplicates and unnecessary columns 
-    new_titanic_df = titanic_df.drop(columns = ['passenger_id','embarked','pclass','deck','age'])
-    
+
+    # drop rows where age is null
+    titanic_df = titanic_df[titanic_df.age.notna()]
+    #Drop unnecessary columns 
+    titanic_df = titanic_df.drop(columns = ['passenger_id','embarked','deck','class'])
+
     #Fill empty value with southampton
-    new_titanic_df['embark_town'] = new_titanic_df.embark_town.fillna(value='Southampton')
+    titanic_df['embark_town'] = titanic_df.embark_town.fillna(value='Southampton')
     
     #Create dummy dataframe and join it with new_titanic_df
-    dummy_df = pd.get_dummies(new_titanic_df[['sex','embark_town']],dummy_na=False,drop_first=[True,True])
-    new_titanic_df = pd.concat([new_titanic_df, dummy_df],axis=1)
+    dummy_df = pd.get_dummies(titanic_df[['sex','embark_town']],dummy_na=False,drop_first=[True,True])
+    titanic_df = pd.concat([titanic_df, dummy_df],axis=1)
+    #Drop the columns used for dummy_df
+    titanic_df = titanic_df.drop(columns = ['sex','embark_town'])
 
-    return new_titanic_df
 
-def titanic_split_data(new_titanic_df):
+    return titanic_df
+
+def titanic_split_data(titanic_df):
     '''
     take in a DataFrame and return train, validate, and test DataFrames; stratify on survived.
     return train, validate, test DataFrames.
     '''
-    train_validate, test = train_test_split(new_titanic_df, test_size=.2, random_state=123, stratify=new_titanic_df.survived)
+    train_validate, test = train_test_split(titanic_df, test_size=.2, random_state=123, stratify=titanic_df.survived)
     
     train, validate = train_test_split(train_validate, 
                                        test_size=.3, 
